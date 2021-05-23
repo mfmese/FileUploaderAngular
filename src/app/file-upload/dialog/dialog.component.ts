@@ -14,7 +14,6 @@ export class DialogComponent implements OnInit {
 
   public files: Set<File> = new Set();
 
-
   constructor(public dialogRef: MatDialogRef<DialogComponent>, public uploadService: FileUploadService) { }
 
   ngOnInit() { }
@@ -41,8 +40,8 @@ export class DialogComponent implements OnInit {
   }
 
   closeDialog() {
-    // if everything was uploaded already, just close the dialog
 
+    // if everything was uploaded already, just close the dialog
     if (this.uploadSuccessful) {
       window.location.reload();
       return this.dialogRef.close();
@@ -64,8 +63,6 @@ export class DialogComponent implements OnInit {
     for (let key in this.progress) {
       allProgressObservables.push(this.progress[key].progress);
     }
-
-    // Adjust the state variables
 
     // The OK-button should have the text "Finish" now
     this.primaryButtonText = 'Finish';
