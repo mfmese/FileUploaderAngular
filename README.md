@@ -28,17 +28,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Development Notes
 
-Configuration
+### Configuration
   You should set apiUrl in environment.ts file in order to connect web api endpoints
   
-Development Strategy
+### Development Strategy
   Development was made taking into account component-based development
   
-Created Test Cases (4 case created)
-  DialogComponent
+### Created Test Cases (4 case created)
+  #### DialogComponent
     should Add Files button created
     should not include Finish button when the dialog opened  (for negative scenario)
-  FileUploadComponent
+  #### FileUploadComponent
     calls the fake service getFiles() method
     should render Updated Files table
     
