@@ -7,8 +7,9 @@ import {
 } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { FileUploadResponse } from './models/fileUploadResponse';
+import { environment } from 'src/environments/environment';
 
-const url = 'http://localhost:3000/FileUpload/UploadFile';
+const url = environment.apiUrl; 
 
 @Injectable()
 export class FileUploadService {
@@ -18,7 +19,7 @@ export class FileUploadService {
 
     let files = new Subject<FileUploadResponse>();
 
-    const request = new HttpRequest('GET', "http://localhost:3000/FileUpload/GetAllFiles");
+    const request = new HttpRequest('GET', url + "FileUpload/GetAllFiles");
     
     this.http.request(request).subscribe((response:any) => {
 
@@ -31,20 +32,20 @@ export class FileUploadService {
     return files.asObservable();
   }
 
-  public upload(
-    files: Set<File>
-  ): { [key: string]: { progress: Observable<number>, body: Observable<FileUploadResponse>  } } {
+  public upload(files: Set<File>): { [key: string]: { progress: Observable<number>, body: Observable<FileUploadResponse>  } } {
  
-    const status: { [key: string]: { progress: Observable<number>, body: Observable<FileUploadResponse> } } = {};
+    const fileResponse: { [key: string]: { progress: Observable<number>, body: Observable<FileUploadResponse> } } = {};
 
     files.forEach(file => {
       const formData: FormData = new FormData();
       formData.append('file', file, file.name);
-      const request = new HttpRequest('POST', url, formData, {
+      const request = new HttpRequest('POST', url + 'FileUpload/UploadFile', formData, {
         reportProgress: true
       });
+
       const progress = new Subject<number>();
       let body = new Subject<FileUploadResponse>();
+
       this.http.request(request).subscribe((event:any) => {
         if (event.type === HttpEventType.UploadProgress) {
           const percentDone = Math.round((100 * event.loaded) / event.total);
@@ -56,13 +57,12 @@ export class FileUploadService {
         }
       });
 
-      status[file.name] = {
+      fileResponse[file.name] = {
         progress: progress.asObservable(),
         body: body.asObservable()
       };
     });
 
-    // return the map of progress.observables
-    return status;
+    return fileResponse;
   }
 }
