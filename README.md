@@ -33,7 +33,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
   
 ### Development Strategy
   Development was made taking into account component-based development
-  
+
+### Run Application
+#### (1) In order to run this application, you need webapi. Therefore, you can go to https://github.com/mfmese/FileUploaderWebApi link and run webapi.
+#### (2) Make sure the webapi is up and running
+#### (3) After setup angular environment file, you can run the application by typing ng serve in the terminal.
+#### (4) Make sure apiUrl is connecting to correct webapi baseurl.
+
 ### Created Test Cases (4 case created)
   #### DialogComponent
     should Add Files button created
