@@ -25,3 +25,21 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Development Notes
+
+Configuration
+  You should set apiUrl in environment.ts file in order to connect web api endpoints
+  
+Development Strategy
+  Development was made taking into account component-based development
+  
+Created Test Cases (4 case created)
+  DialogComponent
+    should Add Files button created
+    should not include Finish button when the dialog opened  (for negative scenario)
+  FileUploadComponent
+    calls the fake service getFiles() method
+    should render Updated Files table
+    
+ 
